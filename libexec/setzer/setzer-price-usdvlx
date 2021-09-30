@@ -12,19 +12,9 @@ sources=(
 )
 
 case $1 in
-  exmo|hitbtc) {
-    vlx_btc=$(setzer x-price "$1" vlx:btc)
-    btc_usd=$(setzer price btcusd)
-    price=$(setzer --format "$(bc -l <<<"$vlx_btc * $btc_usd")")
-    setzer --format "$(bc -l <<<"1 / $price")"
-  };;
-  coingeco) {
-    price=$(setzer x-price "$1" velas:usd)
-    setzer --format "$(bc -l <<<"1 / $price")"
-  };;
-  bitrex|probit|pro_changelly|fmfw) {
-    price=$(setzer x-price "$1" vlx:usdt)
-    setzer --format "$(bc -l <<<"1 / $price")"
+  exmo|hitbtc|coingeco|bitrex|probit|pro_changelly|fmfw) {
+    vlxusd=$(setzer price vlxusd $1)
+    setzer --format "$(bc -l <<<"1 / $vlxusd")"
   };;
   *) {
     setzer --price-commands "-$1-" $pair "${sources[@]}"
