@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -e
+pair=vlxusd
+sources=(
+  coingeco
+  exmo
+  bitrex
+  hitbtc
+  probit
+  pro_changelly
+  fmfw
+)
+
+case $1 in
+  exmo|hitbtc) {
+    vlx_btc=$(setzer x-price "$1" vlx:btc)
+    btc_usd=$(setzer price btcusd)
+    setzer --format "$(bc -l <<<"$vlx_btc * $btc_usd")"
+  };;
+  coingeco) {
+    setzer x-price "$1" velas:usd
+  };;
+  bitrex|probit|pro_changelly|fmfw) {
+    setzer x-price "$1" vlx:usdt
+  };;
+  *) {
+    setzer --price-commands "-$1-" $pair "${sources[@]}"
+  };;
+esac

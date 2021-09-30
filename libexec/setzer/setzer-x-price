@@ -284,6 +284,32 @@ case $src in
     json=$(curl -sS "https://api.upbit.com/v1/ticker?markets=${quote^^}-${base^^}")
     setzer --format "$(jshon <<<"$json" -e 0 -e trade_price)"
   };;
+  coingeco) {
+    json=$(curl -sS "https://api.coingecko.com/api/v3/simple/price?ids=${base}&vs_currencies=${quote}")
+    setzer --format "$(jshon <<<"$json" -e $base -e $quote)"
+  };;
+  exmo) {
+    json=$(curl -sS 'https://api.exmo.com/v1.1/ticker')
+    amount=$(jshon <<<"$json" -e "${base^^}_${quote^^}" -e avg -u)
+    setzer --format "${amount}"
+  };;
+  bitrex) {
+    json=$(curl -sS "https://api.bittrex.com/api/v1.1/public/getticker?market=${quote^^}-${base^^}")
+    setzer --format "$(jshon <<<"$json" -e result -e Last)"
+  };;
+  pro_changelly) {
+    json=$(curl -sS "https://api.pro.changelly.com/api/3/public/price/rate?from=${base^^}&to=${quote^^}")
+    amount="$(jshon <<<"$json" -e ${base^^} -e price -u)"
+    setzer --format "$amount"
+  };;
+  fmfw) {
+    json=$(curl -sS "https://api.fmfw.io/api/3/public/ticker")
+    setzer --format "$(jshon <<<"$json" -e ${pair^^} -e last -u)"
+  };;
+  probit) {
+    json=$(curl -sS "https://api.probit.com/api/exchange/v1/ticker?market_ids=${base^^}-${quote^^}")
+    setzer --format "$(jshon <<<"$json" -e data -e 0 -e last -u)"
+  };;
   *) {
     echo >&2 "Error: exchange not recognised: $src"
   };;
