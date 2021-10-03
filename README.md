@@ -1,6 +1,6 @@
 # Setzer MCD
 
-Query USD price feeds
+Query USD price feeds for velero
 
 ## Usage
 
