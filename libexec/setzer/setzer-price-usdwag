@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+pair=usdwag
+sources=(
+  coingeco
+  gateio
+)
+
+case $1 in
+  coingeco|gateio) {
+    wagusd=$(setzer price wagusd $1)
+    setzer --format "$(bc -l <<<"1 / $wagusd")"
+  };;
+  *) {
+    setzer --price-commands "-$1-" $pair "${sources[@]}"
+  };;
+esac

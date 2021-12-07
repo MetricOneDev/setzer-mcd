@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-pair=vlxusd
+pair=usdvlx
 sources=(
   coingeco
   exmo

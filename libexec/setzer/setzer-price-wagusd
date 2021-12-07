@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -e
+pair=wagusd
+sources=(
+  coingeco
+  gateio
+)
+
+case $1 in
+  coingeco) {
+    setzer x-price "$1" WagyuSwap:usd
+  };;
+  gateio) {
+    setzer x-price "$1" WAGYU:USDT
+  };;
+  *) {
+    setzer price coingeco $pair
+  };;
+esac
