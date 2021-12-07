@@ -8,12 +8,12 @@ sources=(
 
 case $1 in
   coingeco) {
-    setzer x-price "$1" WagyuSwap:usd
+    setzer x-price "$1" wagyuswap:usd
   };;
   gateio) {
     setzer x-price "$1" WAGYU:USDT
   };;
   *) {
-    setzer price coingeco $pair
+    setzer price $pair coingeco
   };;
 esac
