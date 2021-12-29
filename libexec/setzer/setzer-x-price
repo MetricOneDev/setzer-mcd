@@ -197,6 +197,10 @@ case $src in
         id="0xa1d7b2d891e3a1f9ef4bbc5be20630c2feb1c470"
         select="token1Price"
       };;
+      WAGUSD) {
+        id="0xff61e3b34c6c4b0a384f8c320c77d77d7a65e68c"
+        select="token0Price"
+      };;
       CRVETH) {
         id="0x58dc5a51fe44589beb22e8ce67720b5bc5378009"
         select="token0Price"
@@ -234,6 +238,10 @@ case $src in
       };;
       SNXETH) {
         id="0x43ae24960e5534731fc831386c07755a2dc33d47"
+        select="token1Price"
+      };;
+      WAGUSD) {
+        id="0x28d2df1e3481ba90d75e14b9c02cea85b7d6fa2c"
         select="token1Price"
       };;
     esac

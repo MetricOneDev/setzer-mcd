@@ -4,11 +4,9 @@ pair=vlxusd
 sources=(
   coingeco
   exmo
-  bitrex
   hitbtc
-  probit
-  pro_changelly
-  fmfw
+  gateio
+  kucoin
 )
 
 case $1 in
@@ -20,7 +18,7 @@ case $1 in
   coingeco) {
     setzer x-price "$1" velas:usd
   };;
-  bitrex|probit|pro_changelly|fmfw) {
+  bitrex|probit|pro_changelly|fmfw|gateio|kucoin) {
     setzer x-price "$1" vlx:usdt
   };;
   *) {

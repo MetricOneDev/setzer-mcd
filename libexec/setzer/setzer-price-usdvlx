@@ -4,11 +4,9 @@ pair=usdvlx
 sources=(
   coingeco
   exmo
-  bitrex
   hitbtc
-  probit
-  pro_changelly
-  fmfw
+  gateio
+  kucoin
 )
 
 case $1 in

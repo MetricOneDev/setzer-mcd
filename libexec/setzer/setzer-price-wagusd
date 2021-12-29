@@ -4,11 +4,15 @@ pair=wagusd
 sources=(
   coingeco
   gateio
+  uniswap
 )
 
 case $1 in
   coingeco) {
     setzer x-price "$1" wagyuswap:usd
+  };;
+  uniswap) {
+    setzer x-price "$1" WAGUSD
   };;
   gateio) {
     setzer x-price "$1" WAGYU:USDT
