@@ -3,14 +3,12 @@ set -e
 pair=usdvlx
 sources=(
   coingeco
-  exmo
-  hitbtc
   gateio
   kucoin
 )
 
 case $1 in
-  exmo|hitbtc|coingeco|bitrex|probit|pro_changelly|fmfw) {
+  exmo|hitbtc|coingeco|gateio|kucoin) {
     vlxusd=$(setzer price vlxusd $1)
     setzer --format "$(bc -l <<<"1 / $vlxusd")"
   };;
