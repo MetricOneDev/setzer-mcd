@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -e
+pair=vdgtusd
+sources=(
+  coingeco
+  coinbase
+  cmc
+)
+
+case $1 in
+  coingeco) {
+    setzer x-price "$1" velerodao:usd
+  };;
+  coinbase) {
+    setzer x-price "$1" vdgt:USD
+  };;
+  cmc) {
+    setzer x-price "$1" VDGTUSD
+  };;
+  *) {
+    setzer price vdgtusd coingeco
+  };;
+esac

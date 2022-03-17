@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -e
+pair=wbtcusd
+sources=(
+  bitstamp
+  bittrex
+  coinbase
+  gemini
+  kraken
+)
+
+case $1 in
+  bitstamp|bittrex|coinbase|gemini) {
+    setzer price btcusd "$1"
+  };;
+  kraken) {
+    setzer price btcusd kraken
+  };;
+  *) {
+    setzer --price-commands "-$1-" $pair "${sources[@]}"
+  };;
+esac
