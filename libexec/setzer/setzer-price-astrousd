@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -e
+pair=astrousd
+sources=(
+  coingeco
+  gateio
+)
+
+case $1 in
+  coingeco) {
+    setzer x-price "$1" astroswap:usd
+  };;
+  gateio) {
+    setzer x-price "$1" ASTRO:USDT
+  };;
+  *) {
+    setzer price $pair coingeco
+  };;
+esac
