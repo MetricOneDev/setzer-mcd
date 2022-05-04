@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -e
+pair=busd:usd
+sources=(
+  coinbase
+  coingeco
+  cryptocompare
+  hitbtc
+  binance
+  velero_price__wagyu
+)
+
+case $1 in
+  binance) {
+    btc_busd=$(setzer x-price "$1" btc:busd)
+    btc_usd=$(setzer price btcusd)
+    setzer --format "$(bc -l <<<"$btc_usd / $btc_busd")"
+  };;
+  coinbase|coingeco|cryptocompare|hitbtc|velero_price__wagyu) {
+    setzer x-price "$1" $pair
+  };;
+  *) {
+#    export SETZER_MIN_MEDIAN=4
+#    setzer --price-commands "-$1-" $pair "${sources[@]}"
+    setzer x-price velero_price__wagyu $pair
+  };;
+esac

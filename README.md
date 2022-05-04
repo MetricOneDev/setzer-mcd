@@ -51,3 +51,12 @@ Example of usage:
 ```bash
 export ETH_RPC_URL="https://mainnet.infura.io/v3/fac98e56ea7e49608825dfc726fab703"
 ```
+
+### create docker image
+```bash
+docker build . -t velerofinance/setzer-mcd:latest
+```
+or 
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 -t velerofinance/setzer-mcd:latest --push .
+```
