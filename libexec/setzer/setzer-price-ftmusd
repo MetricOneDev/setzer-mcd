@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -e
+pair=ftmusd
+sources=(
+  binance
+  huobi
+  ftx
+  hitbtc
+  kucoin
+  probit
+)
+
+case $1 in
+  ftx|hitbtc) {
+    setzer x-price "$1" ftm:usd
+  };;
+  binance|huobi|kucoin|probit) {
+    ftm_usdt=$(setzer x-price "$1" ftm:usdt)
+    usdt_usd=$(setzer price usdtusd)
+    setzer --format "$(bc -l<<<"$ftm_usdt * $usdt_usd")"
+  };;
+  *) {
+    setzer --price-commands "-$1-" $pair "${sources[@]}"
+  };;
+esac

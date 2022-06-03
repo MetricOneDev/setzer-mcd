@@ -326,6 +326,11 @@ case $src in
         second_token="0xc111c29A988AE0C0087D97b33C6E6766808A3BD3"
         amount="1000000000000000000"
       };;
+      VLXBUSD|VLX:BUSD) {
+        first_token="0xc579D1f3CF86749E05CD06f7ADe17856c2CE3126"
+        second_token="0xcd7509b76281223f5b7d3ad5d47f8d7aa5c2b9bf"
+        amount="1000000000000000000"
+      };;
       *) {
         echo >&2 "Error: pair(${pair^^}) not recognised for this source (${src}): "
       };;

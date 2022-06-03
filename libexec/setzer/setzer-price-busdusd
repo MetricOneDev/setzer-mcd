@@ -19,9 +19,13 @@ case $1 in
   coinbase|coingeco|cryptocompare|hitbtc|velero_price__wagyu) {
     setzer x-price "$1" $pair
   };;
+  velero_price__wagyu) {
+    vlx_busd=$(setzer x-price velero_price__wagyu "VLX:BUSD")
+    vlx_usd=$(setzer price vlxusd)
+    setzer --format "$(bc -l <<<"$vlx_busd / $vlx_usd")"
+  };;
   *) {
-#    export SETZER_MIN_MEDIAN=4
-#    setzer --price-commands "-$1-" $pair "${sources[@]}"
-    setzer x-price velero_price__wagyu $pair
+    export SETZER_MIN_MEDIAN=3
+    setzer --price-commands "-$1-" $pair "${sources[@]}"
   };;
 esac

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -e
+pair=bnbusd
+sources=(
+  binance
+  huobi
+  ftx
+  hitbtc
+  kucoin
+  poloniex
+  pro_changelly
+  probit
+)
+
+case $1 in
+  ftx|hitbtc) {
+    setzer x-price "$1" bnb:usd
+  };;
+  binance|huobi|kucoin|poloniex|pro_changelly|probit) {
+    bnb_usdt=$(setzer x-price "$1" bnb:usdt)
+    usdt_usd=$(setzer price usdtusd)
+    setzer --format "$(bc -l<<<"$bnb_usdt * $usdt_usd")"
+  };;
+  *) {
+    setzer --price-commands "-$1-" $pair "${sources[@]}"
+  };;
+esac
