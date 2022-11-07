@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -e
+pair=mtrusd
+sources=(
+  coingeco
+  kraken
+)
+
+case $1 in
+  coingeco) {
+    setzer x-price "$1" meter-stable:usd
+  };;
+  kraken) {
+    setzer x-price "$1" meter-stable:usdt
+  };;
+  *) {
+#    setzer --price-commands "-$1-" $pair "${sources[@]}"
+    setzer price "$pair" coingeco
+  };;
+esac

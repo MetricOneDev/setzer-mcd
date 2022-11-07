@@ -315,6 +315,10 @@ case $src in
     json=$(curl -sS "https://api.fmfw.io/api/3/public/ticker")
     setzer --format "$(jshon <<<"$json" -e ${pair^^} -e last -u)"
   };;
+  livecoinwatch) {
+    json=$(curl -sS -X POST "https://api.livecoinwatch.com/coins/single" -H 'content-type: application/json' -H 'x-api-key: 077f17c8-2883-45c8-aec9-e8930e920c11' -d "{\"currency\":\"${quote^^}\",\"code\":\"${base^^}\",\"meta\":true}")
+    setzer --format "$(jshon <<<"$json" -e rate -u)"
+  };;
   probit) {
     json=$(curl -sS "https://api.probit.com/api/exchange/v1/ticker?market_ids=${base^^}-${quote^^}")
     setzer --format "$(jshon <<<"$json" -e data -e 0 -e last -u)"
